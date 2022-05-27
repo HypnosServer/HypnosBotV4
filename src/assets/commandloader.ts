@@ -1,5 +1,5 @@
 // Imports
-import { client, help, input, input2, response } from "../assets/interfaces"
+import { client, help, input, input2, response } from "./Types"
 
 export class commandload{
     // Some values

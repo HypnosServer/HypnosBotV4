@@ -1,5 +1,5 @@
 import Discord from "discord.js"
-import { input2 } from "../../assets/interfaces"
+import { input2 } from "../../assets/Types"
 module.exports = {
     run: (input: input2) => {
         let embed = new Discord.MessageEmbed()
@@ -7,8 +7,8 @@ module.exports = {
         return {"text": "sample", "emp": false,"dm": false, "embed": [embed]}
     },
     help: {
-        name:"test",
-        usage:"test <hello>",
+        name: "test",
+        usage: "test <hello>",
         example: "test yo",
         desc: "Test for things",
         group: "public",

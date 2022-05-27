@@ -1,5 +1,5 @@
 import Discord from "discord.js"
-import { client, input2 } from "../../assets/interfaces"
+import { client, input2 } from "../../assets/Types"
 module.exports = {
     run: (input: input2) => {
         input.client.guilds.cache.get("807912058645512212")?.commands.set([])

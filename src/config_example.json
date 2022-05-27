@@ -1,9 +1,11 @@
 {
+    "botname": "Hypnos Bot",
     "token": "TOKEN HERE",
     "prefix": ">",
     "staff": ["313566975739822080"],
     "adminRole": "",
     "memberRole": "",
+    "grinderRole": "",
     "status": {
         "enabled": true,
         "text": "hello",

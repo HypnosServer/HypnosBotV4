@@ -1,4 +1,4 @@
-import Discord, { Collection, Message } from "discord.js"
+import Discord, { Collection, ColorResolvable, Message } from "discord.js"
 
 export interface help{
     name: string,
@@ -23,26 +23,9 @@ export interface help{
 
 export interface client extends Discord.Client{
     commands?: Map<string, {help: help, run: Function, load: Function}>,
-    config?: config | any
+    config?: Config
 }
 
-export interface config{
-    token: string,
-    prefix: string
-    staff: string[]
-    adminRole: string
-    memberRole: string
-    status: {
-        enabled: boolean
-        text: string
-        type: string
-        url: string
-    },
-    embed:{
-        color: Discord.HexColorString
-        footer: string
-    }
-}
 
 export interface input {
     msg?: Discord.Message,
@@ -82,4 +65,28 @@ export interface response{
     emp?: boolean,
     dm?: boolean,
     embed?: Discord.MessageEmbed[]
+}
+
+export interface Config {
+    botname: string;
+    token: string;
+    prefix: string;
+    staff: string[];
+    adminRole: string;
+    memberRole: string;
+    grinderRole: string;
+    status: Status;
+    embed: Embed;
+}
+  
+interface Embed {
+    color: ColorResolvable;
+    footer: string;
+}
+
+interface Status {
+    enabled: boolean;
+    text: string;
+    type: string;
+    url: string;
 }

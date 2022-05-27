@@ -1,5 +1,5 @@
 import Discord from "discord.js"
-import { client } from "../assets/interfaces"
+import { client } from "../assets/Types"
 module.exports.run = (client: client) => {
     client.on("interactionCreate", (interaction) => {
         if(!client.config) return
