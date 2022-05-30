@@ -6,6 +6,17 @@
     "adminRole": "",
     "memberRole": "",
     "grinderRole": "",
+    "chatbridge": {
+        "enabled": false,
+        "channel": "",
+        "servers": [{
+            "name": "SMP",
+            "port": 25565
+        }, {
+            "name": "CMP",
+            "port": 25566
+        }]
+    },
     "status": {
         "enabled": true,
         "text": "hello",

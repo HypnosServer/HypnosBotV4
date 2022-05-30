@@ -67,26 +67,38 @@ export interface response{
     embed?: Discord.MessageEmbed[]
 }
 
-export interface Config {
-    botname: string;
-    token: string;
-    prefix: string;
-    staff: string[];
-    adminRole: string;
-    memberRole: string;
-    grinderRole: string;
-    status: Status;
-    embed: Embed;
-}
-  
-interface Embed {
-    color: ColorResolvable;
-    footer: string;
+export interface Server {
+	name: string;
+	url: string;
 }
 
-interface Status {
-    enabled: boolean;
-    text: string;
-    type: string;
-    url: string;
+export interface Chatbridge {
+	enabled: boolean;
+	channel: string;
+	servers: Server[];
+}
+
+export interface Status {
+	enabled: boolean;
+	text: string;
+	type: string;
+	url: string;
+}
+
+export interface Embed {
+	color: ColorResolvable;
+	footer: string;
+}
+
+export interface Config {
+	botname: string;
+	token: string;
+	prefix: string;
+	staff: string[];
+	adminRole: string;
+	memberRole: string;
+	grinderRole: string;
+	chatbridge: Chatbridge;
+	status: Status;
+	embed: Embed;
 }
