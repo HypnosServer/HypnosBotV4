@@ -2,6 +2,7 @@
 import Discord from "discord.js";
 import fs from "fs";
 import { commandload } from "./assets/commandloader";
+import Connector from "./assets/Connector";
 import { client, Config } from "./assets/Types";
 // other important valuables
 const client: client = new Discord.Client({
@@ -48,3 +49,11 @@ client.login(client.config.token).catch((err) => {
         "Uppy stupy, you need a token that isn't unky wonky and broke, like you!"
     );
 });
+
+export let websocket = new Connector({Config: config, Client: client});
+websocket.start();
+
+export function reconnect() {
+    websocket = new Connector({Config: config, Client: client});
+    websocket.start();
+}

@@ -1,7 +1,15 @@
 import Discord from "discord.js";
 import { client } from "../assets/Types";
+import { websocket } from "../index";
 module.exports.run = (client: client) => {
     client.on("messageCreate", (msg) => {
+        if (
+            msg.channel.id == client.config?.chatbridge.channel &&
+            msg.author.id != client.user?.id &&
+            websocket.chatbridge
+        ) {
+            websocket.send(`MSG [§5${msg.author.username}§f] ${msg.content}`);
+        }
         if (!client.config) return;
         // Returns if the author is a bot
         if (msg.author.bot) return;
