@@ -1,8 +1,8 @@
-import Discord from "discord.js"
-import { input2 } from "../../assets/Types"
+import Discord from "discord.js";
+import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        return {"text": "TPS is 20 ofc you dummy - Feature coming soon"}
+        return { text: "TPS is 20 ofc you dummy - Feature coming soon" };
     },
     help: {
         name: "tps",
@@ -14,6 +14,6 @@ module.exports = {
         adminOnly: false,
         memberOnly: false,
         slash: "both",
-        options: []
-    }
-}
+        options: [],
+    },
+};

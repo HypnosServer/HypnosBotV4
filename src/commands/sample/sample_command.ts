@@ -1,10 +1,9 @@
-import Discord from "discord.js"
-import { input2 } from "../../assets/Types"
+import Discord from "discord.js";
+import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        let embed = new Discord.MessageEmbed()
-        .setTitle("Sample be like")
-        return {"text": "sample", "emp": false,"dm": false, "embed": [embed]}
+        let embed = new Discord.MessageEmbed().setTitle("Sample be like");
+        return { text: "sample", emp: false, dm: false, embed: [embed] };
     },
     help: {
         name: "test",
@@ -30,8 +29,8 @@ module.exports = {
                 CHANNEL
                 ROLE
                 MENTIONABLE
-                NUMBER*/
-            }
-        ]
-    }
-}
+                NUMBER*/,
+            },
+        ],
+    },
+};

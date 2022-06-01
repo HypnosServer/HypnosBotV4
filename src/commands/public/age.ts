@@ -1,12 +1,12 @@
-import Discord from "discord.js"
-import { input2 } from "../../assets/Types"
-import countdown from "countdown"
+import Discord from "discord.js";
+import { input2 } from "../../assets/Types";
+import countdown from "countdown";
 module.exports = {
     run: (input: input2) => {
         let embed = new Discord.MessageEmbed()
-        .setTitle("Age of the Hypnos server")
-        .setDescription(countdown(new Date(1569559890000)).toString())
-        return {"embed": [embed]}
+            .setTitle("Age of the Hypnos server")
+            .setDescription(countdown(new Date(1569559890000)).toString());
+        return { embed: [embed] };
     },
     help: {
         name: "age",
@@ -18,6 +18,6 @@ module.exports = {
         adminOnly: false,
         memberOnly: false,
         slash: "both",
-        options: []
-    }
-}
+        options: [],
+    },
+};

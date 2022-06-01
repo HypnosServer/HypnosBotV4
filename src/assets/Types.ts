@@ -22,6 +22,7 @@ export interface help{
 }
 
 export interface client extends Discord.Client{
+    channels: any;
     commands?: Map<string, {help: help, run: Function, load: Function}>,
     config?: Config
 }
@@ -74,8 +75,9 @@ export interface Server {
 
 export interface Chatbridge {
 	enabled: boolean;
+    websocket_endpoint: string;
 	channel: string;
-	servers: Server[];
+	password: string;
 }
 
 export interface Status {

@@ -8,14 +8,9 @@
     "grinderRole": "",
     "chatbridge": {
         "enabled": false,
+        "websocket_endpoint": "192.168.1.95:12089/taurus",
         "channel": "",
-        "servers": [{
-            "name": "SMP",
-            "port": 25565
-        }, {
-            "name": "CMP",
-            "port": 25566
-        }]
+        "password": "test"
     },
     "status": {
         "enabled": true,

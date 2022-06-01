@@ -1,17 +1,20 @@
-import Discord from "discord.js"
-import { input2 } from "../../assets/Types"
+import Discord from "discord.js";
+import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        if(!input.createdTimestamp) return
+        if (!input.createdTimestamp) return;
         let embed = new Discord.MessageEmbed()
-        .setTitle("Ping")
-        .addField("Client latency", `${Date.now() - input.createdTimestamp} ms`)
-        .addField("API Latency", `${Math.round(input.client.ws.ping)} ms`)
-        return {"text": "Pong! :ping_pong:", "embed": [embed]}
+            .setTitle("Ping")
+            .addField(
+                "Client latency",
+                `${Date.now() - input.createdTimestamp} ms`
+            )
+            .addField("API Latency", `${Math.round(input.client.ws.ping)} ms`);
+        return { text: "Pong! :ping_pong:", embed: [embed] };
     },
     help: {
-        name:"ping",
-        usage:"ping",
+        name: "ping",
+        usage: "ping",
         example: "ping",
         desc: "Shows the ping",
         group: "public",
@@ -19,7 +22,6 @@ module.exports = {
         adminOnly: false,
         memberOnly: false,
         slash: "both",
-        options: [
-        ]
-    }
-}
+        options: [],
+    },
+};
