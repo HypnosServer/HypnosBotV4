@@ -3,7 +3,7 @@ import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
         let embed = new Discord.MessageEmbed().setTitle("test be like");
-        return { text: "hello", emp: true, embed: [embed] };
+        return { text: "hello", emp: true, embeds: [embed] };
     },
     help: {
         name: "test",

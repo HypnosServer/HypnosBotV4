@@ -7,7 +7,7 @@ module.exports = {
             .setDescription(
                 "[Main site](http://hypnos.us.to/)\n[About page](http://hypnos.us.to/pages/about)\n[Map](http://hypnos.shit.vc:5000)"
             );
-        return { embed: [embed] };
+        return { embeds: [embed] };
     },
     help: {
         name: "website",

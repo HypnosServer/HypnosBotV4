@@ -1,14 +1,62 @@
 import Discord from "discord.js";
 import { input2 } from "../../assets/Types";
+const nbt = require('@bedrocker/mc-nbt');
+import fs from "fs";
+
+function search(target: string, v: { name: string, value: any }[]): any {
+    for (const server of v) {
+        if (server.name == target) {
+            return server.value;
+        }
+    }
+    return BigInt(0);
+} 
+
 module.exports = {
-    run: (input: input2) => {
-        return { text: "TPS is 20 ofc you dummy - Feature coming soon" };
+    run: async (input: input2) => {
+        if (!input.client.config?.worlds) {
+            return { text: "unable to access world files" };
+        }
+        let newData: any = [];
+        let oldData: any = [];
+        for (const file of ["level.dat", "level.dat_old"]) {
+            for (const world of input.client.config!.worlds) {
+                const d = fs.readFileSync(world.path + "/" + file);
+                    // if (e) return { text: `Unable to access ${file} in ${world.name}` }
+                nbt.parse(d, (e: any, d: any) => {
+                    if (e) return { text: `Unable to parse ${file} in ${world.name}` }
+                    const value = d.value["Data"].value["LastPlayed"].value;
+                    console.log(value);
+                    if (file == "level.dat") {
+                        newData.push({ name: world.name, value: value });
+                    } else {
+                        oldData.push({ name: world.name, value: value });
+                    }
+                })
+            }
+        }
+        const n = await newData;
+        const o = await oldData;
+
+        let result = "";
+        for (const server of n) {
+            // stolen from https://github.com/Robitobi01/robi_bot/blob/master/commands/tpsCommand.py
+            const old = search(server.name, o);
+            const val = server.value;
+            let tps = 45.0 / ((val - old) / 1000.0) * 20.0;
+            tps = (tps > 20.0) ? 20.0 : tps;
+            tps = (tps < 0.0) ? 0.0 : tps;
+            result += "server: " + server.name + " tps: " + tps + "\n";
+            console.log(tps);
+        }
+
+        return { text: `TPS: \n${result}` };
     },
     help: {
         name: "tps",
         usage: "tps",
         example: "tps",
-        desc: "Shows the tsp of the SMP server",
+        desc: "Shows the tps of the SMP server",
         group: "public",
         staffOnly: false,
         adminOnly: false,

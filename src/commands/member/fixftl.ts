@@ -21,7 +21,7 @@ module.exports = {
                     : "Noone :flushed:"
             )
             .addField("Fixed when?", "ASAP ANOTHIIONY");
-        return { text: "<@867896413602054175>", embed: [embed] };
+        return { text: "<@867896413602054175>", embeds: [embed] };
     },
     help: {
         name: "fixftl",

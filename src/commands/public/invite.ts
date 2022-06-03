@@ -7,7 +7,7 @@ module.exports = {
             .setDescription(
                 "[Link](https://discord.gg/BKadJsM) \nCode: BKadJsM \nFull url: https://discord.gg/BKadJsM"
             );
-        return { embed: [embed] };
+        return { embeds: [embed] };
     },
     help: {
         name: "invite",

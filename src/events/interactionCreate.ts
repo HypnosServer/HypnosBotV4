@@ -1,7 +1,7 @@
 import Discord from "discord.js";
 import { client } from "../assets/Types";
 module.exports.run = (client: client) => {
-    client.on("interactionCreate", (interaction) => {
+    client.on("interactionCreate", async (interaction) => {
         if (!client.config) return;
         if (interaction.isCommand()) {
             const commandName = interaction.commandName;
@@ -37,7 +37,7 @@ module.exports.run = (client: client) => {
                 return;
             }
             // runs the command
-            client
+            await client
                 .commands!.get(commandName)!
                 .run({ interaction: interaction, client: client });
         }

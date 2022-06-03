@@ -22,7 +22,7 @@ module.exports = {
             .addField("RAM", "4GB DDR3L 1333mhz", true)
             .addField("Drive(s)", "500GB HDD", true)
             .addField("GPU", "crazy fast igpu", true);
-        return { embed: [embed] };
+        return { embeds: [embed] };
     },
     help: {
         name: "hardware",

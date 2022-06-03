@@ -6,7 +6,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setTitle("Age of the Hypnos server")
             .setDescription(countdown(new Date(1569559890000)).toString());
-        return { embed: [embed] };
+        return { embeds: [embed] };
     },
     help: {
         name: "age",

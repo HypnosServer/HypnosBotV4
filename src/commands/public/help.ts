@@ -18,7 +18,7 @@ module.exports = {
                     "Here is all commands only members can use."
                 )
                 .addField("Admin", "Here is all commands only admins can use.");
-            return { text: "Here is help for you!", embed: [embed] };
+            return { text: "Here is help for you!", embeds: [embed] };
         } else if (
             search == "staff" &&
             input.client.config?.staff.includes(input.user.id)
@@ -37,7 +37,7 @@ module.exports = {
             });
             embed.setDescription(commandText);
 
-            return { text: "Hello staff", embed: [embed] };
+            return { text: "Hello staff", embeds: [embed] };
         } else if (categories.includes(search)) {
             let embed = new Discord.MessageEmbed().setTitle(
                 `Commands for ${search}`
@@ -53,7 +53,7 @@ module.exports = {
             });
             embed.setDescription(commandText);
 
-            return { text: "Here is help for you!", embed: [embed] };
+            return { text: "Here is help for you!", embeds: [embed] };
         } else if (input.client.commands?.get(search)) {
             let command = input.client.commands?.get(search)?.help;
             if (!command) return { text: "big error" };
@@ -94,7 +94,7 @@ module.exports = {
                               .join("\n")!
                         : "None"
                 );
-            return { text: "You chose a command", embed: [embed] };
+            return { text: "You chose a command", embeds: [embed] };
         } else {
             return { text: "Couldn't find that command/category" };
         }

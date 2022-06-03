@@ -1,14 +1,38 @@
 import Discord from "discord.js";
 import { client } from "../assets/Types";
-import { websocket } from "../index";
+//import { websocket } from "../index";
 module.exports.run = (client: client) => {
-    client.on("messageCreate", (msg) => {
+    client.on("messageCreate", async (msg) => {
         if (
             msg.channel.id == client.config?.chatbridge.channel &&
-            msg.author.id != client.user?.id &&
-            websocket.chatbridge
+            msg.author.id != client.user!.id &&
+            client.config.chatbridge.enabled
         ) {
-            websocket.send(`MSG [§5${msg.author.username}§f] ${msg.content}`);
+            let reply = "";
+            // show if it's a reply or not
+            if (msg.reference) {
+                const replymsg = msg.channel.messages.cache.get(msg.reference.messageId!.toString());
+                let author = `§d${replymsg?.author.username}§f `;
+                if (replymsg?.author.id == client.user!.id) {
+                    author = "";
+                }
+                reply = `reply -> ${author}${replymsg?.content}\n`;
+            } 
+            console.log(msg.content);
+            const attachments = msg.attachments.size > 0;
+            // remove ugly emoji identifier
+            //let content = msg.content.replace(/^[<]|[0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]|[0-9][0-9][0-9][0-9][0-9]|>$/g, "");
+            let content = msg.content;
+            if (content.length > 0) {
+                client.taurus?.send(`MSG ${reply}[§5${msg.author.username}§f] ${content}`);
+            } 
+            // if there are attachments then we can indicate that there are and send each link
+            if (attachments) {
+                client.taurus?.send(`MSG [§5${msg.author.username}§f] ${msg.attachments.size} attachments`);
+                for (const [_, value] of msg.attachments) {
+                    client.taurus?.send(`URL ${value.url}`);
+                }
+            }
         }
         if (!client.config) return;
         // Returns if the author is a bot
@@ -49,7 +73,7 @@ module.exports.run = (client: client) => {
             return;
         }
         // runs the command
-        client
+        await client
             .commands!.get(command)!
             .run({ msg: msg, args: args, client: client });
     });

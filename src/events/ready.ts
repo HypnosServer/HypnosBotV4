@@ -5,6 +5,7 @@ module.exports.run = (client: client) => {
     client.on("ready", () => {
         // Logs to console for letting user know the bot is running
         console.log(`Logged in to ${client.user!.tag}`);
+        //client.taurus?.start();
         // This if statement determins if a custom status is wanted
         if (client.config!.status.enabled) {
             // Sets bots status as specified in config

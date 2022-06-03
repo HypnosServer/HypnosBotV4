@@ -2,9 +2,11 @@ import Discord from "discord.js";
 import Connector from "../../assets/Connector";
 import { input2 } from "../../assets/Types";
 import { reconnect } from "../../index";
+
 module.exports = {
     run: (input: input2) => {
         reconnect();
+        return { "text": "restarted connection" };
     },
     help: {
         name: "reconnect",

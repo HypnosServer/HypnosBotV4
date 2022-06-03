@@ -1,16 +1,28 @@
-import Discord from "discord.js";
+import Discord, { GuildAuditLogsEntry } from "discord.js";
+import { resolve } from "path/posix";
 import { input2 } from "../../assets/Types";
+import { fetchLatestWithType } from "../../index";
+
 module.exports = {
-    run: (input: input2) => {
+    run: async (input: input2) => {
         if (!input.createdTimestamp) return;
         let embed = new Discord.MessageEmbed()
-            .setTitle("Ping")
+            .setTitle("Pong! :ping_pong:")
             .addField(
                 "Client latency",
                 `${Date.now() - input.createdTimestamp} ms`
             )
             .addField("API Latency", `${Math.round(input.client.ws.ping)} ms`);
-        return { text: "Pong! :ping_pong:", embed: [embed] };
+        console.log(embed);
+        input.client.taurus?.send("PING");
+        let reply = await fetchLatestWithType("PONG");
+        if (reply && reply.length > 5) {
+            const value = reply.toString();
+            const sliced = value.slice(4);
+            embed.addField("Taurus Latency", `${Number(BigInt(Date.now()) - BigInt(sliced))} ms`);
+            console.log(BigInt(Date.now()) - BigInt(sliced));
+        }
+        return { embeds: [embed] };
     },
     help: {
         name: "ping",

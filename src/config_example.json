@@ -1,6 +1,12 @@
 {
     "botname": "Hypnos Bot",
     "token": "TOKEN HERE",
+    "worlds": {
+        "1" : {
+            "SMP": "/home/server/Desktop/nsmp/HypnosSurvival",
+            "CMP": "/home/server/Desktop/cmp/hypnos_cmp"
+        }
+    },
     "prefix": ">",
     "staff": ["313566975739822080"],
     "adminRole": "",
@@ -9,7 +15,7 @@
     "chatbridge": {
         "enabled": false,
         "websocket_endpoint": "192.168.1.95:12089/taurus",
-        "channel": "",
+        "channel": "641509498573422602",
         "password": "test"
     },
     "status": {
