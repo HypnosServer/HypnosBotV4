@@ -4,22 +4,25 @@ import { exec } from "child_process";
 
 module.exports = {
     run: async (input: input2) => {
-        let embed = new Discord.MessageEmbed()
-            .setTitle("World File Size");
-        let server = 0;
-        for (const world of input.client.config!.worlds) {
-            exec(`du -sh ${world.path}`, (error, stdout, stderr) => {
-                if (stderr || error) {
-                    return;
-                }
-                let size = stdout.toString().split("\t");
-                embed.addField(world.name, `${size[0]}`);
-                server++;
-                if (server >= input.client.config!.worlds.length) {
-                    input.channel?.send({ embeds: [embed] });
-                }
-            }); 
-        }
+        return new Promise((resolve, reject) => {
+            let embed = new Discord.MessageEmbed().setTitle("World File Size");
+            let server = 0;
+            for (const world of input.client.config!.worlds) {
+                exec(`du -sh ${world.path}`, (error, stdout, stderr) => {
+                    if (stderr || error) {
+                        return reject("Unga bonga error")
+                    }
+                    let size = stdout.toString().split("\t");
+                    if(size[0] = "") return reject("No world folder")
+                    console.log(size);
+                    embed.addField(world.name, `${size[0]}`);
+                    server++;
+                    if (server >= input.client.config!.worlds.length) {
+                        resolve({ embeds: [embed] })
+                    }
+                });
+            }
+        });
     },
     help: {
         name: "worldsize",

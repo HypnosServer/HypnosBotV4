@@ -1,5 +1,4 @@
 import Discord, { Collection, ColorResolvable, Message } from "discord.js";
-import Connector from "./Connector";
 import WebSocket from 'ws';
 
 export interface help {
@@ -24,6 +23,7 @@ export interface help {
 }
 
 export interface client extends Discord.Client {
+    // client: globalThis.WebSocket;
     channels: any;
     commands?: Map<string, { help: help; run: Function; load: Function }>;
     config?: Config;
@@ -39,7 +39,7 @@ export interface input {
 }
 
 export interface input2 {
-    channel: Discord.TextBasedChannels | null;
+    channel: Discord.TextBasedChannel | null;
     guild: Discord.Guild | null;
     id: string;
     inguild: boolean;

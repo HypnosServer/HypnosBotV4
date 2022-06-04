@@ -18,7 +18,6 @@ module.exports.run = (client: client) => {
                 }
                 reply = `reply -> ${author}${replymsg?.content}\n`;
             } 
-            console.log(msg.content);
             const attachments = msg.attachments.size > 0;
             // remove ugly emoji identifier
             //let content = msg.content.replace(/^[<]|[0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]|[0-9][0-9][0-9][0-9][0-9]|>$/g, "");
@@ -78,7 +77,7 @@ module.exports.run = (client: client) => {
             return;
         }
         // runs the command
-        await client
+        client
             .commands!.get(command)!
             .run({ msg: msg, args: args, client: client });
     });

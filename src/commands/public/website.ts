@@ -2,12 +2,14 @@ import Discord from "discord.js";
 import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        let embed = new Discord.MessageEmbed()
-            .setTitle("Website")
-            .setDescription(
-                "[Main site](http://hypnos.us.to/)\n[About page](http://hypnos.us.to/pages/about)\n[Map](http://108.192.154.185:5000)"
-            );
-        return { embeds: [embed] };
+        return new Promise((resolve, reject) => { 
+            let embed = new Discord.MessageEmbed()
+                .setTitle("Website")
+                .setDescription(
+                    "[Main site](http://hypnos.us.to/)\n[About page](http://hypnos.us.to/pages/about)\n[Map](http://108.192.154.185:5000)"
+                );
+            return resolve({ embeds: [embed] })
+        })
     },
     help: {
         name: "website",

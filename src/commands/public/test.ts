@@ -2,8 +2,10 @@ import Discord from "discord.js";
 import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        let embed = new Discord.MessageEmbed().setTitle("test be like");
-        return { text: "hello", emp: true, embeds: [embed] };
+        return new Promise(async (resolve, reject) => {
+            let embed = new Discord.MessageEmbed().setTitle("test be like");
+            return resolve({ text: "hello", emp: true, embeds: [embed] })
+        })
     },
     help: {
         name: "test",

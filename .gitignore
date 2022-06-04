@@ -1,1 +1,11 @@
 node_modules
+src/config.json
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+
+# macOS
+.DS_Store

@@ -1,11 +1,15 @@
 import Discord from "discord.js";
 import { client } from "../assets/Types";
+import { reconnect } from "../assets/Connector";
+
+
 module.exports.run = (client: client) => {
     // A on ready function
     client.on("ready", () => {
         // Logs to console for letting user know the bot is running
         console.log(`Logged in to ${client.user!.tag}`);
-        //client.taurus?.start();
+        reconnect();
+        
         // This if statement determins if a custom status is wanted
         if (client.config!.status.enabled) {
             // Sets bots status as specified in config

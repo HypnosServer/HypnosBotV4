@@ -2,12 +2,11 @@
 import Discord, { Client } from "discord.js";
 import fs from "fs";
 import { commandload } from "./assets/commandloader";
-import Connector from "./assets/Connector";
 import { client, Config } from "./assets/Types";
-import WebSocket from 'ws';
+
 
 // other important valuables
-const client: client = new Discord.Client({
+const client: any = new Discord.Client({
     intents: [
         Discord.Intents.FLAGS.DIRECT_MESSAGES,
         Discord.Intents.FLAGS.GUILDS,
@@ -17,50 +16,13 @@ const client: client = new Discord.Client({
 let config: Config = JSON.parse(fs.readFileSync("./config.json").toString());
 client.config = config;
 client.commands = new Map();
-//client.taurus = new WebSocket(client.config.chatbridge.websocket_endpoint);
+
+
+// Chat brigde stuff (dont touch, nc made it. So its very special, just like him)
 client.messageCache = [];
 
-export function reconnect() {
-    client.taurus = new WebSocket(client.config!.chatbridge.websocket_endpoint);
-    client.taurus!.onmessage = async (e: any) => {
-        let msg = e.data.toString();
-        //console.log(msg);
-        if (msg.startsWith("MSG ") && client.config?.chatbridge.enabled && msg.length > 5) {
-            client.channels.cache.get("641509498573422602").send(msg.slice(4));
-        } else {
-            client.messageCache?.push(msg);
-        }
-    }
-    client.taurus!.onopen = async () => {
-        client.taurus?.send(client.config!.chatbridge.password);
-        client.taurus?.send("PING");
-    }
-}
-reconnect();
 
-export async function fetchLatestWithType(type: string): Promise<String | void> {
-    return new Promise((resolve, reject) => {
-        if (!client.messageCache) {
-            reject();
-        }
-        const cacheLength = client.messageCache!.length;
-        let tries = 0;
-        const timeout = setTimeout(() => {
-            if (client.messageCache!.length > 0 && cacheLength < client.messageCache!.length) {
-                const latest = client.messageCache![client.messageCache!.length - 1];
-                if (latest.length >= 1 && latest.split(" ")[0] == type) {
-                    resolve(client.messageCache!.pop());
-                    clearTimeout(timeout);
-                }
-            }
-            tries++;
-            if (tries > 5) {
-                clearTimeout(timeout);
-                reject();
-            }
-        }, 20);
-    });
-}
+
 /*
 process
     .on("unhandledRejection", (reason, p) => {
@@ -90,8 +52,10 @@ fs.readdirSync("./commands").forEach((subfolder) => {
 });
 
 // Logging on to the specified token in config
-client.login(client.config.token).catch((err) => {
+client.login(client.config.token).catch((err: any) => {
     console.log(
         "Uppy stupy, you need a token that isn't unky wonky and broke, like you!"
     );
 });
+
+export { client };

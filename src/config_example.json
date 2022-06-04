@@ -1,22 +1,20 @@
 {
     "botname": "Hypnos Bot",
     "token": "TOKEN HERE",
-    "worlds": {
-        "1" : {
-            "SMP": "/home/server/Desktop/nsmp/HypnosSurvival",
-            "CMP": "/home/server/Desktop/cmp/hypnos_cmp"
-        }
-    },
-    "prefix": [">", "<"],
-    "staff": ["313566975739822080"],
-    "adminRole": "",
-    "memberRole": "",
-    "grinderRole": "",
+    "prefix": [";", ">"],
+    "staff": ["313566975739822080", "566444484850745351"],
+    "adminRole": "638528165123194880",
+    "memberRole": "667884757232779274",
+    "grinderRole": "705187937146634392",
+    "worlds": [
+            { "name": "SMP", "path": "/home/server/Desktop/nsmp/HypnosSurvival" },
+            { "name": "CMP", "path": "/home/server/Desktop/cmp/hypnos_cmp" }
+    ],
     "chatbridge": {
-        "enabled": false,
-        "websocket_endpoint": "192.168.1.95:12089/taurus",
+        "enabled": true,
+        "websocket_endpoint": "ws://ssh.hypnos.ws:11800/taurus",
         "channel": "641509498573422602",
-        "password": "test"
+        "password": "_Pk]S>>e)?RKw4nz"
     },
     "status": {
         "enabled": true,
@@ -26,6 +24,9 @@
     },
     "embed":{
         "color": "#00A1BA",
-        "footer": "Hypnos bestnos"
+        "footer": {
+                "text": "Hypnos bestnos",
+                "iconURL": "https://cdn.discordapp.com/icons/626974236753264664/843dbb8ad515f9c9c1015acb52af8f2d.webp?size=96"
+        }
     }
 }

@@ -2,7 +2,9 @@ import Discord from "discord.js";
 import { client, input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        input.client.guilds.cache.get("807912058645512212")?.commands.set([]);
+        return new Promise((resolve, reject) => {
+            input.client.guilds.cache.get("807912058645512212")?.commands.set([]);
+        })
     },
     help: {
         name: "delcoms",
