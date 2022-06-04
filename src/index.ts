@@ -17,26 +17,26 @@ const client: client = new Discord.Client({
 let config: Config = JSON.parse(fs.readFileSync("./config.json").toString());
 client.config = config;
 client.commands = new Map();
-client.taurus = new WebSocket(client.config.chatbridge.websocket_endpoint);
+//client.taurus = new WebSocket(client.config.chatbridge.websocket_endpoint);
 client.messageCache = [];
 
 export function reconnect() {
     client.taurus = new WebSocket(client.config!.chatbridge.websocket_endpoint);
-}
-
-client.taurus!.onmessage = async (e: any) => {
-    let msg = e.data.toString();
-    //console.log(msg);
-    if (msg.startsWith("MSG ") && client.config?.chatbridge.enabled && msg.length > 5) {
-        client.channels.cache.get("641509498573422602").send(msg.slice(4));
-    } else {
-        client.messageCache?.push(msg);
+    client.taurus!.onmessage = async (e: any) => {
+        let msg = e.data.toString();
+        //console.log(msg);
+        if (msg.startsWith("MSG ") && client.config?.chatbridge.enabled && msg.length > 5) {
+            client.channels.cache.get("641509498573422602").send(msg.slice(4));
+        } else {
+            client.messageCache?.push(msg);
+        }
+    }
+    client.taurus!.onopen = async () => {
+        client.taurus?.send(client.config!.chatbridge.password);
+        client.taurus?.send("PING");
     }
 }
-client.taurus!.onopen = async () => {
-    client.taurus?.send(client.config!.chatbridge.password);
-    client.taurus?.send("PING");
-}
+reconnect();
 
 export async function fetchLatestWithType(type: string): Promise<String | void> {
     return new Promise((resolve, reject) => {
@@ -44,6 +44,7 @@ export async function fetchLatestWithType(type: string): Promise<String | void> 
             reject();
         }
         const cacheLength = client.messageCache!.length;
+        let tries = 0;
         const timeout = setTimeout(() => {
             if (client.messageCache!.length > 0 && cacheLength < client.messageCache!.length) {
                 const latest = client.messageCache![client.messageCache!.length - 1];
@@ -52,8 +53,12 @@ export async function fetchLatestWithType(type: string): Promise<String | void> 
                     clearTimeout(timeout);
                 }
             }
-            reject();
-        }, 50);
+            tries++;
+            if (tries > 5) {
+                clearTimeout(timeout);
+                reject();
+            }
+        }, 20);
     });
 }
 /*

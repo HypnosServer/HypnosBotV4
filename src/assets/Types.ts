@@ -103,7 +103,7 @@ export interface Embed {
 export interface Config {
     botname: string;
     token: string;
-    prefix: string;
+    prefix: string[];
     staff: string[];
     worlds: {
         name: string,

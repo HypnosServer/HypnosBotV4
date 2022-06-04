@@ -8,7 +8,10 @@ async function gatherReply(input: input2, type: string) {
     if (reply && reply.toString().length > 0) {
         const value = reply.toString();
         const sliced = value.slice(type.length + 1);
-        return { "text": sliced };
+        let embed = new Discord.MessageEmbed()
+        .setTitle("Backup")
+        .setDescription(sliced);
+        return { embeds: [embed] };
     } else {
         return { "text": "error" };
     }
@@ -33,7 +36,7 @@ module.exports = {
                     break;
                 }
                 input.client.taurus?.send("RM_BACKUP " + args[1]);
-                return await  gatherReply(input, "RM_BACKUP");
+                return await gatherReply(input, "RM_BACKUP");
             case "remove":
                 if (args.length != 2) {
                     return { "text": "expected backup name, please see backup ls" };

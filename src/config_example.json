@@ -7,7 +7,7 @@
             "CMP": "/home/server/Desktop/cmp/hypnos_cmp"
         }
     },
-    "prefix": ">",
+    "prefix": [">", "<"],
     "staff": ["313566975739822080"],
     "adminRole": "",
     "memberRole": "",

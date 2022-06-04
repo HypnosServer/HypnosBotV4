@@ -23,7 +23,7 @@ module.exports = {
             for (const world of input.client.config!.worlds) {
                 const d = fs.readFileSync(world.path + "/" + file);
                     // if (e) return { text: `Unable to access ${file} in ${world.name}` }
-                nbt.parse(d, (e: any, d: any) => {
+                    await nbt.parse(d, (e: any, d: any) => {
                     if (e) return { text: `Unable to parse ${file} in ${world.name}` }
                     const value = d.value["Data"].value["LastPlayed"].value;
                     console.log(value);
@@ -32,31 +32,30 @@ module.exports = {
                     } else {
                         oldData.push({ name: world.name, value: value });
                     }
-                })
+                    if (oldData.length == input.client.config!.worlds.length) {
+                        let embed = new Discord.MessageEmbed()
+                                .setTitle("TPS :smiling_imp:");
+                        for (const server of newData) {
+                            // stolen from https://github.com/Robitobi01/robi_bot/blob/master/commands/tpsCommand.py
+                            const old = search(server.name, oldData);
+                            const val = server.value;
+                            let tps = 45.0 / (Number(val - old) / 1000.0) * 20.0;
+                            tps = (tps > 20.0) ? 20.0 : tps;
+                            tps = (tps < 0.0) ? 0.0 : tps;
+                            embed.addField(server.name, `${tps.toFixed(1)} TPS`);
+                        }
+                        input.channel?.send({ embeds: [embed] });
+                        //return { embeds: [embed] };
+                    }
+                });
             }
         }
-        const n = await newData;
-        const o = await oldData;
-
-        let result = "";
-        for (const server of n) {
-            // stolen from https://github.com/Robitobi01/robi_bot/blob/master/commands/tpsCommand.py
-            const old = search(server.name, o);
-            const val = server.value;
-            let tps = 45.0 / ((val - old) / 1000.0) * 20.0;
-            tps = (tps > 20.0) ? 20.0 : tps;
-            tps = (tps < 0.0) ? 0.0 : tps;
-            result += "server: " + server.name + " tps: " + tps + "\n";
-            console.log(tps);
-        }
-
-        return { text: `TPS: \n${result}` };
     },
     help: {
         name: "tps",
         usage: "tps",
         example: "tps",
-        desc: "Shows the tps of the SMP server",
+        desc: "Shows the tps of linked servers",
         group: "public",
         staffOnly: false,
         adminOnly: false,

@@ -20,7 +20,7 @@ module.exports = {
             const value = reply.toString();
             const sliced = value.slice(4);
             embed.addField("Taurus Latency", `${Number(BigInt(Date.now()) - BigInt(sliced))} ms`);
-            console.log(BigInt(Date.now()) - BigInt(sliced));
+            return { embeds: [embed] };
         }
         return { embeds: [embed] };
     },

@@ -3,9 +3,9 @@ import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
         let embed = new Discord.MessageEmbed()
-            .setTitle("Website and sub pages")
+            .setTitle("Website")
             .setDescription(
-                "[Main site](http://hypnos.us.to/)\n[About page](http://hypnos.us.to/pages/about)\n[Map](http://hypnos.shit.vc:5000)"
+                "[Main site](http://hypnos.us.to/)\n[About page](http://hypnos.us.to/pages/about)\n[Map](http://108.192.154.185:5000)"
             );
         return { embeds: [embed] };
     },

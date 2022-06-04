@@ -7,7 +7,10 @@ module.exports = {
         const enabled = input.client.config?.chatbridge.enabled;
         if (enabled != undefined) {
             input.client.config!.chatbridge.enabled = !enabled;
-            return { "text": `toggled chat bridge to ${!enabled}` };
+            let embed = new Discord.MessageEmbed()
+            .setTitle("Chat bridge")
+            .setDescription(`toggled chat bridge to ${!enabled}`);
+            return { embeds: [embed] };
         } else {
             return { "text": "unable to toggle bridge, chat bridge is not set" };
         }

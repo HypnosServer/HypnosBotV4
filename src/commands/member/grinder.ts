@@ -6,7 +6,6 @@ module.exports = {
             input.member.roles.add(input.client.config!.grinderRole);
             return { text: "Gave you the grinder role!" };
         } else {
-            //console.log(msg.member.roles);
             input.member.roles.cache.remove(
                 input.guild!.roles.cache.find(
                     (r) => r.id === `${input.client.config!.grinderRole}`

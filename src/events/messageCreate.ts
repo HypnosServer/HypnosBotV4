@@ -38,10 +38,15 @@ module.exports.run = (client: client) => {
         // Returns if the author is a bot
         if (msg.author.bot) return;
         // Returns if msg doesn't start with prefix
-        if (!msg.content.startsWith(client.config.prefix)) return;
+        let cmdPrefix = "";
+        for (const prefix of client.config.prefix) {
+            if (msg.content.startsWith(prefix)) cmdPrefix = prefix;
+        }
+        if (cmdPrefix.length == 0) return;
+        
         // Declares args and command value
         const args = msg.content
-            .slice(client.config.prefix.length)
+            .slice(cmdPrefix.length)
             .trim()
             .split(/ +/);
         const command = args.shift()!.toLowerCase();
