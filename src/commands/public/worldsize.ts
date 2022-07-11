@@ -13,8 +13,7 @@ module.exports = {
                         return reject("Unga bonga error")
                     }
                     let size = stdout.toString().split("\t");
-                    if(size[0] = "") return reject("No world folder")
-                    console.log(size);
+                    if(size[0] == "") return reject("No world folder")
                     embed.addField(world.name, `${size[0]}`);
                     server++;
                     if (server >= input.client.config!.worlds.length) {

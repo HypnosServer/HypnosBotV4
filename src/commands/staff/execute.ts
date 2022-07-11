@@ -19,10 +19,17 @@ module.exports = {
             if (reply && reply.toString().length > 0) {
                 const value = reply.toString();
                 const sliced = value.slice(5);
-                let embed = new Discord.MessageEmbed()
+                if (sliced.length > 0) {
+                    let embed = new Discord.MessageEmbed()
                     .setTitle("execute :dagger:")
                     .addField(command, sliced);
-                return resolve({ embeds: [embed] })
+                    return resolve({ embeds: [embed] })
+                } else {
+                    let embed = new Discord.MessageEmbed()
+                    .setTitle("execute :dagger:")
+                    .addField(command, "sent command to session");
+                    return resolve({ embeds: [embed] })
+                }
             } else {
                 return reject({ text: "error" })
             }

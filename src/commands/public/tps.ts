@@ -27,10 +27,9 @@ module.exports = {
                     }
                     const d = fs.readFileSync(world.path + "/" + file);
                         // if (e) return { text: `Unable to access ${file} in ${world.name}` }
-                        await nbt.parse(d, (e: any, d: any) => {
+                    await nbt.parse(d, (e: any, d: any) => {
                         if (e) return reject({ text: `Unable to parse ${file} in ${world.name}` })
                         const value = d.value["Data"].value["LastPlayed"].value;
-                        console.log(value);
                         if (file == "level.dat") {
                             newData.push({ name: world.name, value: value });
                         } else {
@@ -54,7 +53,7 @@ module.exports = {
                     });
                 }
             }
-         })
+        })
     },
     help: {
         name: "tps",
