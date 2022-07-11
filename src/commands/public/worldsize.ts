@@ -10,14 +10,14 @@ module.exports = {
             for (const world of input.client.config!.worlds) {
                 exec(`du -sh ${world.path}`, (error, stdout, stderr) => {
                     if (stderr || error) {
-                        return reject("Unga bonga error")
+                        return reject("Unga bonga error");
                     }
                     let size = stdout.toString().split("\t");
-                    if(size[0] == "") return reject("No world folder")
+                    if (size[0] == "") return reject("No world folder");
                     embed.addField(world.name, `${size[0]}`);
                     server++;
                     if (server >= input.client.config!.worlds.length) {
-                        resolve({ embeds: [embed] })
+                        resolve({ embeds: [embed] });
                     }
                 });
             }

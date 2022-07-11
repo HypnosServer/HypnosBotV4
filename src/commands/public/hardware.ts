@@ -2,7 +2,7 @@ import Discord from "discord.js";
 import { input2 } from "../../assets/Types";
 module.exports = {
     run: (input: input2) => {
-        return new Promise((resolve, reject) => { 
+        return new Promise((resolve, reject) => {
             let embed = new Discord.MessageEmbed()
                 .setTitle("Sample be like")
                 .setTitle("Hypnos Server Hardware")
@@ -23,8 +23,8 @@ module.exports = {
                 .addField("RAM", "4GB DDR3L 1333mhz", true)
                 .addField("Drive(s)", "500GB HDD", true)
                 .addField("GPU", "crazy fast igpu", true);
-            return resolve({ embeds: [embed] })
-         })
+            return resolve({ embeds: [embed] });
+        });
     },
     help: {
         name: "hardware",

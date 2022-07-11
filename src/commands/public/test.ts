@@ -4,8 +4,8 @@ module.exports = {
     run: (input: input2) => {
         return new Promise(async (resolve, reject) => {
             let embed = new Discord.MessageEmbed().setTitle("test be like");
-            return resolve({ text: "hello", emp: true, embeds: [embed] })
-        })
+            return resolve({ text: "hello", emp: true, embeds: [embed] });
+        });
     },
     help: {
         name: "test",
