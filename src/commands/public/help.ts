@@ -25,7 +25,10 @@ module.exports = {
                         "Admin",
                         "Here is all commands only admins can use."
                     );
-                return resolve({ text: "Here is help for you!", embeds: [embed] })
+                return resolve({
+                    text: "Here is help for you!",
+                    embeds: [embed],
+                });
             } else if (
                 search == "staff" &&
                 input.client.config?.staff.includes(input.user.id)
@@ -44,7 +47,7 @@ module.exports = {
                 });
                 embed.setDescription(commandText);
 
-                return resolve({ text: "Hello staff", embeds: [embed] })
+                return resolve({ text: "Hello staff", embeds: [embed] });
             } else if (categories.includes(search)) {
                 let embed = new Discord.MessageEmbed().setTitle(
                     `Commands for ${search}`
@@ -60,10 +63,13 @@ module.exports = {
                 });
                 embed.setDescription(commandText);
 
-                return resolve({ text: "Here is help for you!", embeds: [embed] })
+                return resolve({
+                    text: "Here is help for you!",
+                    embeds: [embed],
+                });
             } else if (input.client.commands?.get(search)) {
                 let command = input.client.commands?.get(search)?.help;
-                if (!command) return reject({ text: "big error" })
+                if (!command) return reject({ text: "big error" });
                 let embed = new Discord.MessageEmbed()
                     .setTitle(command.name)
                     .setDescription(command.desc)
@@ -101,9 +107,12 @@ module.exports = {
                                   .join("\n")!
                             : "None"
                     );
-                return resolve({ text: "You chose a command", embeds: [embed] })
+                return resolve({
+                    text: "You chose a command",
+                    embeds: [embed],
+                });
             } else {
-                return resolve({ text: "Couldn't find that command/category" })
+                return resolve({ text: "Couldn't find that command/category" });
             }
         });
     },

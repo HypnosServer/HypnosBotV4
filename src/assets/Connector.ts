@@ -15,7 +15,9 @@ export function reconnect() {
     client.taurus!.onopen = async () => {
         console.log("Connecting to Taurus");
         client.taurus?.send(client.config!.chatbridge.password);
+        console.log("authenticating...");
         client.taurus?.send("PING");
+        await fetchLatestWithType("PONG");
     }
 }
 
@@ -30,6 +32,10 @@ export async function fetchLatestWithType(type: string): Promise<String | void> 
             if(client.messageCache!.length > 0 && cacheLength < client.messageCache!.length) {
                 const latest = client.messageCache![client.messageCache!.length - 1];
                 if (latest.length >= 1 && latest.split(" ")[0] == type) {
+                    if (!client.config.taurus_connected) {
+                        console.log("Taurus connected successfully");
+                        client.config.taurus_connected = true;
+                    }
                     return resolve(client.messageCache!.pop());
                 }
             }

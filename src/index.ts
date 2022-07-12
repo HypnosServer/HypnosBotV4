@@ -16,14 +16,11 @@ const client: any = new Discord.Client({
 let config: Config = JSON.parse(fs.readFileSync("./config.json").toString());
 client.config = config;
 client.commands = new Map();
-
+client.config.taurus_connected = false;
 
 // Chat brigde stuff (dont touch, nc made it. So its very special, just like him)
 client.messageCache = [];
 
-
-
-/*
 process
     .on("unhandledRejection", (reason, p) => {
         console.log(`We did upsi woopsi, why it did that: ${reason}`);
@@ -32,7 +29,7 @@ process
     .on("uncaughtException", (reason, p) => {
         console.log(`We did upsi woopsi, why it did that: ${reason}`);
     });
-*/
+
 // load all events
 let eventfolder = fs.readdirSync("./events");
 for (let i = 0; i < eventfolder.length; i++) {

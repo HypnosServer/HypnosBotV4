@@ -28,6 +28,7 @@ export interface client extends Discord.Client {
     commands?: Map<string, { help: help; run: Function; load: Function }>;
     config?: Config;
     taurus?: WebSocket;
+    taurus_connected?: boolean;
     messageCache?: string[];
 }
 
@@ -39,7 +40,7 @@ export interface input {
 }
 
 export interface input2 {
-    channel: Discord.TextBasedChannel | null;
+    channel: Discord.TextBasedChannels | null;
     guild: Discord.Guild | null;
     id: string;
     inguild: boolean;
@@ -97,7 +98,7 @@ export interface Status {
 
 export interface Embed {
     color: ColorResolvable;
-    footer: {text: string, iconURL: string};
+    footer: string;
 }
 
 export interface Config {
