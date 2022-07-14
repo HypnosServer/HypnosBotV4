@@ -65,9 +65,9 @@ module.exports = {
                 for (let i = 0; i < scoreboard.length; i++) {
                     total += scoreboard[i][1];
                 }
-                console.log(total);
+                let converted_total = total + ` (${(total / 1000000).toFixed(1)} m)`
                 // Adding the total to the top of the players
-                scoreboard.unshift(["Total", total]);
+                scoreboard.unshift(["Total", converted_total]);
                 let players = [];
                 let scoresForPlayers = [];
                 let player_length = 0;
