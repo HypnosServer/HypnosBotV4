@@ -17,14 +17,14 @@ module.exports.run = (client: client) => {
                     author = "";
                 }
                 reply = `reply -> ${author}${replymsg?.content}\n`;
-            } 
+            }
             const attachments = msg.attachments.size > 0;
             // remove ugly emoji identifier
             //let content = msg.content.replace(/^[<]|[0-9]|[0-9][0-9]|[0-9][0-9][0-9]|[0-9][0-9][0-9][0-9]|[0-9][0-9][0-9][0-9][0-9]|>$/g, "");
             let content = msg.content;
             if (content.length > 0) {
                 client.taurus?.send(`MSG ${reply}[§5${msg.author.username}§f] ${content}`);
-            } 
+            }
             // if there are attachments then we can indicate that there are and send each link
             if (attachments) {
                 client.taurus?.send(`MSG [§5${msg.author.username}§f] ${msg.attachments.size} attachments`);
@@ -42,7 +42,6 @@ module.exports.run = (client: client) => {
             if (msg.content.startsWith(prefix)) cmdPrefix = prefix;
         }
         if (cmdPrefix.length == 0) return;
-        
         // Declares args and command value
         const args = msg.content
             .slice(cmdPrefix.length)
