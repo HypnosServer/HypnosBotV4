@@ -116,4 +116,5 @@ export interface Config {
     chatbridge: Chatbridge;
     status: Status;
     embed: Embed;
+	inGamePrefix: string;
 }

@@ -92,7 +92,7 @@ module.exports = {
                 }
                 let player_string = players
                     .join("\n")
-                    .replace("_", "_")
+                    .replace("_", "\_")
                     .split("|");
                 let score_string = scoresForPlayers.join("\n").split("|");
                 console.log(`${player_string.length} - ${score_string.length}`);
