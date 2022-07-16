@@ -2,11 +2,12 @@ import {client} from "../index"
 import WebSocket from "ws";
 import fs from "fs";
 const nbt = require("@bedrocker/mc-nbt");
+import { DLMathEval } from "dl-math-eval-ts";
 
 
 const fuzzy_accuracy = 0.7;
 
-const fuzzy = (possible: string[], term: string, accuracy: number) => {
+const fuzzy = (possible: string[], term: string, accuracy: number): string => {
 	if (possible.indexOf(term) >= 0) {
 		return term;
 	}
@@ -19,6 +20,7 @@ const fuzzy = (possible: string[], term: string, accuracy: number) => {
 			return board;
 		}
 	}
+	return "";
 }
 
 const genScoreCache = (server: string) => {
@@ -57,6 +59,30 @@ const genScoreCache = (server: string) => {
 	return path;
 }
 
+const updateTotal = async (server: string, sliced: string, args: string) => {
+	if (sliced.split(" ").length < 1) {
+		return;
+	}
+	const scoreboard = fs.readFileSync("./scoreboards.txt",{encoding:'utf8', flag:'r'}).split("|");
+	const lowerarg = args.toLowerCase();
+	const board = fuzzy(scoreboard, lowerarg, fuzzy_accuracy);
+	const path = genScoreCache(server);
+	let data = fs.readFileSync(path + "/data/scoreboard.dat");
+	// Read nbt scoreboard file.
+	await nbt.parse(data, (e: any, d: any) => {
+		if (e) return;
+		const allData = d.value.data.value.PlayerScores.value.value;
+		let total = 0;
+		for (const dp of allData) {
+			if (dp.Objective.value == board && dp.Name.value != "Total") {
+				total += dp.Score.value;
+			}
+		}
+		client.taurus.send(`RCON ${server} scoreboard players set Total ${board} ${total}`);
+	})
+}
+
+// can potentially fail if we recieve a multiline message with the in game command on not the first line
 export function reconnect() {
     client.taurus = new WebSocket(client.config!.chatbridge.websocket_endpoint);
     client.taurus!.onmessage = async (e: any) => {
@@ -64,7 +90,7 @@ export function reconnect() {
         if (msg.startsWith("MSG ") && client.config?.chatbridge.enabled && msg.length > 5) {
 			let server = msg.slice(4);
 			if (!server.startsWith("[")) {
-				client.channels.cache.get("641509498573422602").send(server);
+				client.channels.cache.get(client.config.chatbridge.channel).send(server);
 				return;
 			} else {
 				server = server.slice(1);
@@ -74,6 +100,7 @@ export function reconnect() {
 			const line = msg.slice(6 + server.length).trim();
 			const endUsername = line.indexOf(">");
 			if (endUsername < 0) {
+				client.channels.cache.get(client.config.chatbridge.channel).send(msg.slice(4));
 				return;
 			}
 			const sliced = line.slice(endUsername + 2);
@@ -81,6 +108,7 @@ export function reconnect() {
 				const command = sliced.split(" ")[0].slice(client.config?.inGamePrefix.length);
 				// need to replace in future, only supports 1 argument because of pop()
 				const args = sliced.split(" ").pop();
+				const lower = args.toLowerCase();
 				switch (command) {
 					case "score":
 						if (sliced.split(" ").length < 1) {
@@ -88,8 +116,20 @@ export function reconnect() {
 						}
 						genScoreCache(server);
 						const scoreboards = fs.readFileSync("./scoreboards.txt",{encoding:'utf8', flag:'r'}).split("|");
-						const lower = args.toLowerCase();
-						client.taurus!.send(`RCON ${server} scoreboard objectives setdisplay sidebar ${fuzzy(scoreboards, lower, fuzzy_accuracy)}`);
+						const board = fuzzy(scoreboards, lower, fuzzy_accuracy);
+						await updateTotal(server, sliced, board);
+						client.taurus!.send(`RCON ${server} scoreboard objectives setdisplay sidebar ${board}`);
+						break;
+					case "=":
+						const end = msg.indexOf(">");
+						if (end < 0) {
+							break;
+						}
+						const ref : any = {};
+						console.log(msg.slice(end + 4));
+						const result: number = DLMathEval.evaluateExpression(msg.slice(end + 4).trim(), ref);
+						client.taurus!.send(`MSG ${result}`);
+						client.channels.get(client.config.chatbridge.channel).send(result);
 						break;
 					case "updateScoreboards":
 						fs.stat("./scoreboards.txt", async (e, _) => {
@@ -102,32 +142,15 @@ export function reconnect() {
 						genScoreCache(server);
 						break;
 					case "total":
-						if (sliced.split(" ").length < 1) {
-							return;
-						}
-						const scoreboard = fs.readFileSync("./scoreboards.txt",{encoding:'utf8', flag:'r'}).split("|");
-						const lowerarg = args.toLowerCase();
-						const board = fuzzy(scoreboard, lowerarg, fuzzy_accuracy);
-						const path = genScoreCache(server);
-						let data = fs.readFileSync(path + "/data/scoreboard.dat");
-						// Read nbt scoreboard file.
-						await nbt.parse(data, (e: any, d: any) => {
-							if (e) return;
-							const allData = d.value.data.value.PlayerScores.value.value;
-							let total = 0;
-							for (const dp of allData) {
-								if (dp.Objective.value == board && dp.Name.value.toLowerCase() != "total") {
-									total += dp.Score.value;
-								}
-							}
-							client.taurus.send(`RCON ${server} scoreboard players add Total ${board} ${total}`);
-						})
+						const scoreboardcache = fs.readFileSync("./scoreboards.txt",{encoding:'utf8', flag:'r'}).split("|");
+						const boards = fuzzy(scoreboardcache, lower, fuzzy_accuracy);
+						await updateTotal(server, sliced, boards);
 						break;
 					default:
 						break;
 				}
 			}
-            client.channels.cache.get("641509498573422602").send(msg.slice(4));
+            client.channels.cache.get(client.config.chatbridge.channel).send(msg.slice(4));
         } else {
             client.messageCache?.push(msg);
         }

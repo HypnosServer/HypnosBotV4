@@ -40,7 +40,7 @@ export interface input {
 }
 
 export interface input2 {
-    channel: Discord.TextBasedChannels | null;
+    channel: Discord.TextBasedChannel | null;
     guild: Discord.Guild | null;
     id: string;
     inguild: boolean;

@@ -40,7 +40,6 @@ module.exports = {
 
                 let scoreboard: any = {};
                 let scores = scoreboardData.PlayerScores.value.value;
-                console.log(scores.length);
                 for (let i = 0; i < scores.length; i++) {
                     if (
                         scores[i].Score.value != 0 &&
