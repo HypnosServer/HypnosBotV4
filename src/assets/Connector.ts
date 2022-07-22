@@ -5,9 +5,9 @@ const nbt = require("@bedrocker/mc-nbt");
 import { DLMathEval } from "dl-math-eval-ts";
 
 
-const fuzzy_accuracy = 0.7;
+const fuzzy_accuracy = 0.8;
 
-const fuzzy = (possible: string[], term: string, accuracy: number): string => {
+export const fuzzy = (possible: string[], term: string, accuracy: number): string => {
 	if (possible.indexOf(term) >= 0) {
 		return term;
 	}
