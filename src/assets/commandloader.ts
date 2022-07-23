@@ -14,6 +14,16 @@ export class commandload {
     }
 
     public load() {
+        if(this.help.alias){
+            this.help.alias.forEach((alias: String) => {
+                client.guilds.cache.get("626974236753264664")?.commands.create({
+                    name: alias,
+                    description: this.help.desc,
+                    options: this.help.options ?? undefined,
+                    type: "CHAT_INPUT",
+                });
+            })
+        }
         // loads command to test server
         client.guilds.cache.get("626974236753264664")?.commands.create({
             name: this.help.name,

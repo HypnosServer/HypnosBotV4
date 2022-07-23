@@ -9,6 +9,7 @@ module.exports = {
     },
     help: {
         name: "test",
+        alias: ["ayo"],
         usage: "test <hello>",
         example: "test yo",
         desc: "Test for things",

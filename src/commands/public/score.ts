@@ -113,6 +113,7 @@ module.exports = {
     },
     help: {
         name: "score",
+        alias: [],
         usage: "score",
         example: "score",
         desc: "displays specified scoreboard as an embed",

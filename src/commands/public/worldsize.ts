@@ -25,6 +25,7 @@ module.exports = {
     },
     help: {
         name: "worldsize",
+        alias: [],
         usage: "worldsize",
         example: "worldsize",
         desc: "Shows the world sizes of attached servers",

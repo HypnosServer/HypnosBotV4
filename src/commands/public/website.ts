@@ -13,6 +13,7 @@ module.exports = {
     },
     help: {
         name: "website",
+        alias: [],
         usage: "website",
         example: "website",
         desc: "Gives links to the main site and sub pages",

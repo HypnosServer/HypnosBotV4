@@ -39,6 +39,7 @@ module.exports = {
     },
     help: {
         name: "session",
+        alias: [],
         usage: "session",
         example: "session",
         desc: "list sessions running on taurus",

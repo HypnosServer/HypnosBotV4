@@ -8,6 +8,7 @@ module.exports = {
     },
     help: {
         name: "delcoms",
+        alias: [],
         usage: "delcoms [guild id | all]",
         example: "delcoms all",
         desc: "deleting slash commands",

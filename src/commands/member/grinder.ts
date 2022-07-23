@@ -18,6 +18,7 @@ module.exports = {
     },
     help: {
         name: "grinder",
+        alias: [],
         usage: "grinder",
         example: "grinder",
         desc: "Toggles grinder role",

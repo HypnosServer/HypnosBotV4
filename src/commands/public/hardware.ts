@@ -28,6 +28,7 @@ module.exports = {
     },
     help: {
         name: "hardware",
+        alias: [],
         usage: "hardware",
         example: "hardware",
         desc: "Sends the hardware information of NotCreative's servers",

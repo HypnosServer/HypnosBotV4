@@ -21,9 +21,10 @@ module.exports = {
     },
     help: {
         name: "list",
+        alias: ["online"],
         usage: "list",
         example: "list",
-        desc: "list players online the server",
+        desc: "List players online the server",
         group: "public",
         staffOnly: false,
         adminOnly: false,

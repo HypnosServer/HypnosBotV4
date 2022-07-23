@@ -55,9 +55,10 @@ module.exports = {
     },
     help: {
         name: "api",
+        alias: [],
         usage: "api",
         example: "api",
-        desc: "list status of various Mojang/Minecraft apis",
+        desc: "List status of various Mojang/Minecraft apis",
         group: "public",
         staffOnly: false,
         adminOnly: false,
