@@ -1,6 +1,9 @@
 # HypnosBot V4
 
-This is the repository of the Discord bot that we use on the Hypnos server. More description here nc!
+This is the repository of the Discord bot that we use on the Hypnos server.
+
+This discord facing bot was split from the bot that handles backups and other file system operations to improve redundancy. Communication is done through a websocket.
+
 This is for the [Discord server](https://discord.com/invite/2gpsaf2Ve8)
 
 <img src="https://cdn.discordapp.com/attachments/627196903808827422/774357157033672724/BannerNoBackground.png" alt="drawing" width="750"/>
@@ -9,7 +12,7 @@ This is for the [Discord server](https://discord.com/invite/2gpsaf2Ve8)
 ## Features
 
 - 22 commands
-- Chat brigde between minecraft and discord with [Taurus](https://github.com/notseanray/taurus)
+- Chat bridge between minecraft and discord with [Taurus](https://github.com/notseanray/taurus)
 - Run commands ingame from discord
 - Easy to add commands with provided command loader
 - Promise based commands
@@ -88,11 +91,11 @@ And [Taurus](https://github.com/notseanray/taurus) is by:
 
 Here are some related projects by other Minecraft tech servers
 
+#### Javascript (also uses Taurus)
+[Quacon](https://github.com/Sylk0s/quacon-bot)
+
 #### Typescript
 [EndTech](https://github.com/samipourquoi/endbot)
-
-#### Javascript
-[Quacon](https://github.com/Sylk0s/quacon-bot)
 
 #### Rust
 [ProtoTech](https://github.com/ProtoTechMC/ProtoBot2) (WIP)
