@@ -66,7 +66,15 @@ module.exports = {
         adminOnly: false,
         memberOnly: false,
         slash: "both",
-        options: [],
+        options: [
+			{
+                name: "rolename",
+                description: "the name of the role",
+                required: true,
+                type: "STRING",
+            },
+
+		],
     },
 };
 
