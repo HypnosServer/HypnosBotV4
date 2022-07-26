@@ -164,9 +164,10 @@ module.exports = {
     },
     help: {
         name: "iscore",
+        alias: [],
         usage: "iscore",
         example: "iscore",
-        desc: "displays specified scoreboard as an image",
+        desc: "Displays specified scoreboard as an image",
         group: "public",
         staffOnly: false,
         adminOnly: false,

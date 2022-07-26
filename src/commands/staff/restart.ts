@@ -23,6 +23,7 @@ module.exports = {
     },
     help: {
         name: "restart",
+        alias: [],
         usage: "restart <server>",
         example: "restart CMP",
         desc: "force restart server",

@@ -13,6 +13,7 @@ module.exports = {
     },
     help: {
         name: "invite",
+        alias: [],
         usage: "invite",
         example: "invite",
         desc: "Invite the Hypnos Discord server",

@@ -18,6 +18,7 @@ module.exports = {
     },
     help: {
         name: "reconnect",
+        alias: [],
         usage: "reconnect",
         example: "reconnect",
         desc: "reconnects websocket between taurus and HypnosBotV4",

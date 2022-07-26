@@ -44,6 +44,13 @@ fs.readdirSync("./commands").forEach((subfolder) => {
     for (let i = 0; i < folder.length; i++) {
         // Loads command with the command loader
         let command = new commandload(`./commands/${subfolder}/${folder[i]}`);
+
+        if(command.help.alias){
+            command.help.alias.forEach((alias: string) => {
+                client.commands!.set(alias, command);
+            })
+        }
+
         client.commands!.set(command.help.name, command);
     }
 });
