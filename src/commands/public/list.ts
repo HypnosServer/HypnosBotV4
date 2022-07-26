@@ -12,7 +12,7 @@ module.exports = {
                 const sliced = value.slice(5).replace(":", ": ");
                 let embed = new Discord.MessageEmbed()
                     .setTitle("list :pencil:")
-                    .setDescription(sliced);
+                    .setDescription("```" + sliced + "```");
                 return resolve({ embeds: [embed] });
             } else {
                 return reject({ text: "error" });

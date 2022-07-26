@@ -86,7 +86,7 @@ export class commandload {
                                 return;
                             embed
                                 .setColor(input2.client.config?.embed.color)
-                                .setFooter(input2.client.config?.embed.footer);
+                                .setFooter({ text: input2.client.config?.embed.footer });
                         });
                     }
                     if (input.msg) {
