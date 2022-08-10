@@ -77,8 +77,8 @@ module.exports = {
                     player_length += k.length;
                     score_length += v.length;
                     if (
-                        player_length / 900.0 > messages ||
-                        score_length / 900.0 > messages
+                        player_length / 700.0 > messages ||
+                        score_length / 700.0 > messages
                     ) {
                         messages++;
                         player_length = 0;
@@ -95,7 +95,6 @@ module.exports = {
                     .split("|");
                 let score_string = scoresForPlayers.join("\n").split("|");
                 console.log(`${player_string.length} - ${score_string.length}`);
-                let scoreboard_embeds = [];
                 for (let i = 0; i < player_string.length; i++) {
                     let score_name = "Score: " + input.args!.join(" ");
                     if (player_string.length > 1) {
@@ -104,9 +103,11 @@ module.exports = {
                     let embed = new Discord.MessageEmbed().setTitle(score_name);
                     embed.addField("Players", "```" + player_string[i] + "```", true);
                     embed.addField("Scores", "```" + score_string[i] + "```", true);
-                    scoreboard_embeds.push(embed);
+					embed.setColor(input.client!.config!.embed.color);
+					embed.setFooter({ text: input.client!.config!.embed.footer });
+					input.channel!.send({ embeds: [embed] });
                 }
-                resolve({ embeds: scoreboard_embeds });
+                //resolve({ embeds: scoreboard_embeds });
             });
         });
     },

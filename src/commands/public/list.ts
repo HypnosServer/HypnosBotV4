@@ -10,9 +10,10 @@ module.exports = {
             if (reply && reply.toString().length > 0) {
                 const value = reply.toString();
                 const sliced = value.slice(5).replace(":", ": ");
+				const msg = sliced.length > 1 ? "```" + sliced + "```" : "```No players are currently online```";
                 let embed = new Discord.MessageEmbed()
                     .setTitle("list :pencil:")
-                    .setDescription("```" + sliced + "```");
+                    .setDescription(msg);
                 return resolve({ embeds: [embed] });
             } else {
                 return reject({ text: "error" });
