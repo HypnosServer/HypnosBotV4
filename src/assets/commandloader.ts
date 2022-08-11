@@ -100,14 +100,11 @@ export class commandload {
                         });
                     }
                     if (input.msg) {
-                        if (respose.dm == true) {
-                            console.log("bruh");
+                        if (respose.dm) {
                             input.msg.author.send({
                                 content: respose.text,
                                 embeds: respose.embeds,
                             });
-                            console.log("output2");
-                            input.msg.channel.send("In your dms");
                             return;
                         }
                         let replys: any = {};
@@ -124,8 +121,7 @@ export class commandload {
                         if (!input.interaction) return;
                         if (!input.interaction?.isCommand()) return;
                         // input2.options = input.interaction.options
-                        if (respose.dm == true) {
-                            console.log("bruh2");
+                        if (respose.dm) {
                             input.interaction.user.send({
                                 content: respose.text,
                                 embeds: respose.embeds,
