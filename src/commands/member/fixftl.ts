@@ -27,6 +27,7 @@ module.exports = {
     },
     help: {
         name: "fixftl",
+        alias: [],
         usage: "fixftl",
         example: "fixftl",
         desc: "This command wil automatically fix the fix within 3-173 business days",

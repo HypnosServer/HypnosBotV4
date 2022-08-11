@@ -14,6 +14,16 @@ export class commandload {
     }
 
     public load() {
+        if(this.help.alias){
+            this.help.alias.forEach((alias: String) => {
+                client.guilds.cache.get("626974236753264664")?.commands.create({
+                    name: alias,
+                    description: this.help.desc,
+                    options: this.help.options ?? undefined,
+                    type: "CHAT_INPUT",
+                });
+            })
+        }
         // loads command to test server
         client.guilds.cache.get("626974236753264664")?.commands.create({
             name: this.help.name,
@@ -86,18 +96,15 @@ export class commandload {
                                 return;
                             embed
                                 .setColor(input2.client.config?.embed.color)
-                                .setFooter(input2.client.config?.embed.footer);
+                                .setFooter({ text: input2.client.config?.embed.footer });
                         });
                     }
                     if (input.msg) {
-                        if (respose.dm == true) {
-                            console.log("bruh");
+                        if (respose.dm) {
                             input.msg.author.send({
                                 content: respose.text,
                                 embeds: respose.embeds,
                             });
-                            console.log("output2");
-                            input.msg.channel.send("In your dms");
                             return;
                         }
                         let replys: any = {};
@@ -114,8 +121,7 @@ export class commandload {
                         if (!input.interaction) return;
                         if (!input.interaction?.isCommand()) return;
                         // input2.options = input.interaction.options
-                        if (respose.dm == true) {
-                            console.log("bruh2");
+                        if (respose.dm) {
                             input.interaction.user.send({
                                 content: respose.text,
                                 embeds: respose.embeds,

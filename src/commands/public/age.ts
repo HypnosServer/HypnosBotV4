@@ -12,6 +12,7 @@ module.exports = {
     },
     help: {
         name: "age",
+        alias: [],
         usage: "age",
         example: "age",
         desc: "Shows the age of the Hypnos server",

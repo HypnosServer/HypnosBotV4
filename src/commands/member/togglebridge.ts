@@ -18,6 +18,7 @@ module.exports = {
     },
     help: {
         name: "togglebridge",
+        alias: [],
         usage: "togglebridge",
         example: "togglebridge",
         desc: "toggles chat bridge entirely",

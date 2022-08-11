@@ -37,6 +37,7 @@ module.exports = {
     },
     help: {
         name: "execute",
+        alias: [],
         usage: "execute <server> <command>",
         example: "execute SMP list",
         desc: "execute command via rcon",

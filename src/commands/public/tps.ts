@@ -68,6 +68,7 @@ module.exports = {
     },
     help: {
         name: "tps",
+        alias: [],
         usage: "tps",
         example: "tps",
         desc: "Shows the tps of linked servers",

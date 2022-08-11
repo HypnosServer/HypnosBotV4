@@ -118,6 +118,7 @@ module.exports = {
     },
     help: {
         name: "help",
+        alias: [],
         usage: "help <command | category>",
         example: "help ping",
         desc: "Help command",

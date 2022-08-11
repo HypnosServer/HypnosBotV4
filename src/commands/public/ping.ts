@@ -35,6 +35,7 @@ module.exports = {
     },
     help: {
         name: "ping",
+        alias: [],
         usage: "ping",
         example: "ping",
         desc: "Shows the ping",

@@ -71,6 +71,7 @@ module.exports = {
     },
     help: {
         name: "backup",
+        alias: [],
         usage: "backup",
         example: "backup ls",
         desc: "manage backups",
@@ -89,7 +90,7 @@ module.exports = {
             {
                 name: "name",
                 description: "Name of the backup",
-                required: true,
+                required: false,
                 type: "STRING",
             }
         ],
